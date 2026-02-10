@@ -61,6 +61,15 @@ class CORSRequestHandler(BaseHTTPRequestHandler):
                 else:
                     self.send_json_response({'scenarios': []})
             
+            elif path == '/api/log-risk-learning':
+                learning_file = os.path.join(os.path.dirname(__file__), 'output', 'log_risk_learning.json')
+                if os.path.exists(learning_file):
+                    with open(learning_file, 'r') as f:
+                        data = json.load(f)
+                    self.send_json_response(data)
+                else:
+                    self.send_json_response({'sources': {}, 'total_examples_seen': 0})
+
             elif path == '/api/risk-summary':
                 # Load risk summary from output
                 summary_file = os.path.join(os.path.dirname(__file__), 'output', 'risk_summary.json')
@@ -86,7 +95,19 @@ class CORSRequestHandler(BaseHTTPRequestHandler):
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             
-            if path == '/api/analyze':
+            if path == '/api/predict-log-risk':
+                data = json.loads(body)
+                orchestrator = RiskPlatformOrchestrator()
+                prediction = orchestrator.predict_log_risk(
+                    raw_log=data.get('rawLog', ''),
+                    source=data.get('source')
+                )
+                self.send_json_response({
+                    'status': 'success',
+                    'result': prediction
+                })
+
+            elif path == '/api/analyze':
                 # Parse request body
                 data = json.loads(body)
                 
@@ -153,7 +174,9 @@ def run_server(host='0.0.0.0', port=5000):
     print('  GET  /api/vulnerabilities - Get all vulnerabilities')
     print('  GET  /api/risk-scenarios - Get risk scenarios')
     print('  GET  /api/risk-summary - Get risk summary')
+    print('  GET  /api/log-risk-learning - Get learned cross-source risk profile')
     print('  POST /api/analyze - Run risk analysis')
+    print('  POST /api/predict-log-risk - Predict risk from raw log text')
     httpd.serve_forever()
 
 
