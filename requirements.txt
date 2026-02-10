@@ -1,0 +1,28 @@
+# Cyber Risk Platform - Python Requirements
+# This platform uses only Python standard library - no external dependencies!
+
+# Python >= 3.8 required for:
+# - dataclasses
+# - typing features
+# - datetime enhancements
+
+# Optional dependencies for enhanced functionality:
+
+# For better JSON handling (optional)
+# python-dateutil>=2.8.2
+
+# For EVTX file parsing directly (optional - currently expects JSON)
+# python-evtx>=0.7.4
+
+# For advanced XML parsing if needed (optional)
+# lxml>=4.9.0
+
+# For testing (optional)
+# pytest>=7.0.0
+# pytest-cov>=4.0.0
+
+# For formatting (optional)
+# black>=22.0.0
+# flake8>=5.0.0
+
+# Note: The core platform functionality works with Python 3.8+ standard library only!
