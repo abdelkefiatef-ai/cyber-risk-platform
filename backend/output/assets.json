@@ -1,0 +1,148 @@
+[
+  {
+    "id": "asset_web_prod_01",
+    "name": "WEB-PROD-01",
+    "category": "Server",
+    "ipAddress": "10.0.1.45",
+    "os": "Ubuntu",
+    "osVersion": "22.04 LTS",
+    "criticality": "Mission Critical",
+    "riskScore": 0,
+    "vulnerabilityIds": [],
+    "lastScanDate": "2026-02-10T13:06:38.913331",
+    "status": "Active",
+    "tags": [
+      "Production",
+      "DMZ",
+      "Web Server"
+    ],
+    "owner": "DevOps Team",
+    "location": "AWS us-east-1",
+    "exposedToInternet": true,
+    "containsSensitiveData": true,
+    "patchLevel": "Outdated",
+    "antivirusStatus": "Active",
+    "firewallEnabled": true
+  },
+  {
+    "id": "asset_db_finance",
+    "name": "DB-FINANCE-ALPHA",
+    "category": "Database",
+    "ipAddress": "10.0.5.12",
+    "os": "Windows Server",
+    "osVersion": "2022",
+    "criticality": "Mission Critical",
+    "riskScore": 0,
+    "vulnerabilityIds": [],
+    "lastScanDate": "2026-02-10T13:06:38.913380",
+    "status": "Active",
+    "tags": [
+      "Database",
+      "Finance",
+      "PCI-DSS"
+    ],
+    "owner": "DBA Team",
+    "location": "On-Premise DC-1",
+    "exposedToInternet": false,
+    "containsSensitiveData": true,
+    "patchLevel": "Current",
+    "antivirusStatus": "Active",
+    "firewallEnabled": true
+  },
+  {
+    "id": "asset_workstation_exec",
+    "name": "CEO-LAPTOP-M4",
+    "category": "Workstation",
+    "ipAddress": "172.16.10.55",
+    "os": "macOS",
+    "osVersion": "14.2",
+    "criticality": "High",
+    "riskScore": 0,
+    "vulnerabilityIds": [],
+    "lastScanDate": "2026-02-10T13:06:38.913424",
+    "status": "Active",
+    "tags": [
+      "Endpoint",
+      "VIP",
+      "Executive"
+    ],
+    "owner": "Executive Office",
+    "location": "Remote",
+    "exposedToInternet": true,
+    "containsSensitiveData": true,
+    "patchLevel": "Current",
+    "antivirusStatus": "Active",
+    "firewallEnabled": true
+  },
+  {
+    "id": "asset_WEB-PROD-01",
+    "name": "WEB-PROD-01",
+    "category": "Server",
+    "ipAddress": "192.168.1.100",
+    "os": "Linux",
+    "osVersion": null,
+    "criticality": "Medium",
+    "riskScore": 0,
+    "vulnerabilityIds": [],
+    "lastScanDate": "2026-02-10T13:06:38.923220",
+    "status": "Active",
+    "tags": [
+      "auto-discovered"
+    ],
+    "owner": null,
+    "location": null,
+    "exposedToInternet": false,
+    "containsSensitiveData": false,
+    "patchLevel": "Unknown",
+    "antivirusStatus": "Unknown",
+    "firewallEnabled": true
+  },
+  {
+    "id": "asset_DB-FINANCE-ALPHA",
+    "name": "DB-FINANCE-ALPHA",
+    "category": "Database",
+    "ipAddress": "10.0.0.50",
+    "os": "Linux",
+    "osVersion": null,
+    "criticality": "Medium",
+    "riskScore": 0,
+    "vulnerabilityIds": [],
+    "lastScanDate": "2026-02-10T13:06:38.924060",
+    "status": "Active",
+    "tags": [
+      "auto-discovered"
+    ],
+    "owner": null,
+    "location": null,
+    "exposedToInternet": false,
+    "containsSensitiveData": false,
+    "patchLevel": "Unknown",
+    "antivirusStatus": "Unknown",
+    "firewallEnabled": true
+  },
+  {
+    "id": "asset_CEO-LAPTOP-M4",
+    "name": "CEO-LAPTOP-M4",
+    "category": "Server",
+    "ipAddress": "Unknown",
+    "os": "Windows",
+    "osVersion": null,
+    "criticality": "Medium",
+    "riskScore": 78,
+    "vulnerabilityIds": [
+      "vuln_logclear_winevent_1102_1707575700"
+    ],
+    "lastScanDate": "2026-02-10T13:06:38.924066",
+    "status": "Active",
+    "tags": [
+      "auto-discovered"
+    ],
+    "owner": null,
+    "location": null,
+    "exposedToInternet": false,
+    "containsSensitiveData": false,
+    "patchLevel": "Unknown",
+    "antivirusStatus": "Unknown",
+    "firewallEnabled": true
+  }
+]
