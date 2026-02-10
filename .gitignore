@@ -47,3 +47,4 @@ htmlcov/
 
 # Output (optional - comment out if you want to commit sample outputs)
 # output/*.json
+.env
