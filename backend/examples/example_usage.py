@@ -155,8 +155,15 @@ def main():
     print("-"*70)
     orchestrator.export_to_json("./output")
     
-    # Example 6: Generate report
-    print("\n\nStep 6: Generating report...")
+    # Example 6: Predict risk directly from raw logs (asset-independent)
+    print("\n\nStep 6: Predicting risk directly from raw logs...")
+    print("-"*70)
+    sample_log = "Defender alert: suspected ransomware behavior with lateral movement attempts"
+    log_prediction = orchestrator.predict_log_risk(sample_log, source="defender")
+    print(f"Predicted log risk: {log_prediction['prediction']['risk_level']} (confidence {log_prediction['prediction']['confidence']})")
+
+    # Example 7: Generate report
+    print("\n\nStep 7: Generating report...")
     print("-"*70)
     report = orchestrator.generate_report()
     with open("./output/risk_report.txt", "w") as f:

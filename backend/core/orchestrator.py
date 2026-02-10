@@ -11,6 +11,7 @@ from parsers.syslog_parser import SyslogParser
 from parsers.windows_event_parser import WindowsEventParser
 from parsers.m365_defender_parser import M365DefenderParser
 from engines.risk_engine import RiskCalculationEngine
+from core.open_source_llm_risk_predictor import OpenSourceLLMRiskPredictor
 
 
 class RiskPlatformOrchestrator:
@@ -27,6 +28,9 @@ class RiskPlatformOrchestrator:
         
         # Initialize risk engine
         self.risk_engine = RiskCalculationEngine()
+
+        # Open-source LLM assisted risk predictor (log-centric, no asset requirement)
+        self.log_risk_predictor = OpenSourceLLMRiskPredictor()
         
         # Storage
         self.all_vulnerabilities: Dict[str, Vulnerability] = {}
@@ -43,6 +47,9 @@ class RiskPlatformOrchestrator:
         # Analyze for vulnerabilities
         vulns = self.syslog_parser.analyze_security_events(events)
         print(f"Detected {len(vulns)} vulnerabilities from syslog")
+
+        # Learn from this source log stream for future risk predictions
+        self.log_risk_predictor.learn_from_events(events)
         
         # Add vulnerabilities to engine
         for vuln in vulns:
@@ -74,6 +81,9 @@ class RiskPlatformOrchestrator:
         # Analyze for vulnerabilities
         vulns = self.windows_parser.analyze_security_events(events)
         print(f"Detected {len(vulns)} vulnerabilities from Windows events")
+
+        # Learn from this source log stream for future risk predictions
+        self.log_risk_predictor.learn_from_events(events)
         
         # Add vulnerabilities to engine
         for vuln in vulns:
@@ -105,6 +115,9 @@ class RiskPlatformOrchestrator:
         # Analyze for vulnerabilities
         vulns = self.m365_parser.analyze_m365_security(events)
         print(f"Detected {len(vulns)} vulnerabilities from M365")
+
+        # Learn from this source log stream for future risk predictions
+        self.log_risk_predictor.learn_from_events(events)
         
         # Add vulnerabilities to engine
         for vuln in vulns:
@@ -133,6 +146,9 @@ class RiskPlatformOrchestrator:
         # Convert alerts to vulnerabilities
         vulns = self.m365_parser.analyze_defender_alerts(events)
         print(f"Detected {len(vulns)} vulnerabilities from Defender")
+
+        # Learn from this source log stream for future risk predictions
+        self.log_risk_predictor.learn_from_events(events)
         
         # Add vulnerabilities to engine
         for vuln in vulns:
@@ -221,6 +237,14 @@ class RiskPlatformOrchestrator:
                 asset.vulnerability_ids = list(set(asset.vulnerability_ids + host_vuln_ids))
                 asset.last_scan_date = datetime.now()
     
+    def predict_log_risk(self, raw_log: str, source: Optional[str] = None) -> Dict:
+        """Predict risk for a single raw log line using open-source LLM + adaptive fallback."""
+        prediction = self.log_risk_predictor.predict_risk_level(raw_log=raw_log, source=source)
+        return {
+            "input": {"source": source or "unknown", "raw_log": raw_log},
+            "prediction": prediction
+        }
+
     def calculate_all_risks(self) -> Dict:
         """Calculate risk for all assets and generate scenarios"""
         print("\n" + "="*60)
@@ -238,11 +262,13 @@ class RiskPlatformOrchestrator:
         
         # Get summary
         summary = self.risk_engine.get_risk_summary()
-        
+        llm_risk_learning = self.log_risk_predictor.get_model_summary()
+
         return {
             "summary": summary,
             "risk_results": risk_results,
-            "scenarios": scenarios
+            "scenarios": scenarios,
+            "log_risk_learning": llm_risk_learning
         }
     
     def export_to_json(self, output_dir: str = "./output"):
@@ -270,11 +296,18 @@ class RiskPlatformOrchestrator:
         with open(f"{output_dir}/risk_summary.json", "w") as f:
             json.dump(summary, f, indent=2)
         
+        # Export open-source LLM learning profile
+        llm_summary = self.log_risk_predictor.get_model_summary()
+        with open(f"{output_dir}/log_risk_learning.json", "w") as f:
+            json.dump(llm_summary, f, indent=2)
+        
+        
         print(f"\nExported data to {output_dir}/")
         print(f"  - assets.json ({len(assets_data)} assets)")
         print(f"  - vulnerabilities.json ({len(vulns_data)} vulnerabilities)")
         print(f"  - risk_scenarios.json ({len(scenarios_data)} scenarios)")
         print(f"  - risk_summary.json")
+        print(f"  - log_risk_learning.json")
     
     def generate_report(self) -> str:
         """Generate a text report"""
