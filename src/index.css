@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - Atmosphere-First: The system employs a 'Cyber-Precision' aesthetic, focusing on high-density information display without cognitive overload. It uses deep obsidian tones for dark mode to minimize eye fatigue during long monitoring sessions.
+   - Visual Style: Neo-minimalism with 'Physicality'. Cards use subtle rim-lighting (inner borders) to denote hierarchy. Risk levels are communicated through chromatic intensity rather than just hue.
+   - Logic: Designed for a high-stakes cybersecurity environment where the distinction between 'asset' and 'risk' must be immediate. Surfaces use a layered Z-axis approach to separate global telemetry from specific risk scenarios.
+
+2. TYPOGRAPHY:
+   - Sans (Inter): Chosen for its exceptional legibility in dense UI grids and dashboard widgets. Its neutral tone maintains professional authority.
+   - Mono (JetBrains Mono): Specifically used for technical identifiers, CVE IDs, log snippets, and asset IP addresses to ensure character distinction (e.g., 0 vs O).
+
+3. COLOR SYSTEM:
+   - Primary Hue (255 - Cyber Blue): A technical blue that conveys trust and stability. In Dark Mode, it shifts slightly towards Cyan (Hue 230) for better luminosity.
+   - Semantic Mapping: --destructive (Hue 25) indicates active exploits; --warning (Hue 55) for vulnerabilities; --success (Hue 150) for patched/secured states.
+   - Chart Tokens: Optimized for data visualization contrast against deep backgrounds, following the MITRE ATT&CK color coding conventions.
+
+4. USAGE GUIDE:
+   - Layout: Standardized on a 'Bento Box' modular surface system. High-level risk scenarios occupy 2x2 or full-width spans, while asset lists use 1x1 widgets.
+   - Effects: Use `backdrop-blur` for popovers and modals to maintain context of the underlying risk map. Rim-light (1px inner border) is mandatory for card surfaces in Dark Mode to define boundaries against the deep background.
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: JetBrains Mono, monospace;
+  
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.99 0.005 255);
+  --foreground: oklch(0.15 0.02 255);
+  --card: oklch(1.0 0.0 0);
+  --card-foreground: oklch(0.15 0.02 255);
+  --popover: oklch(1.0 0.0 0);
+  --popover-foreground: oklch(0.15 0.02 255);
+  --primary: oklch(0.45 0.16 255);
+  --primary-foreground: oklch(0.98 0.01 255);
+  --secondary: oklch(0.95 0.02 255);
+  --secondary-foreground: oklch(0.25 0.04 255);
+  --muted: oklch(0.96 0.01 255);
+  --muted-foreground: oklch(0.45 0.03 255);
+  --accent: oklch(0.94 0.03 255);
+  --accent-foreground: oklch(0.25 0.04 255);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+  --border: oklch(0.91 0.01 255);
+  --input: oklch(0.91 0.01 255);
+  --ring: oklch(0.45 0.16 255);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.55 0.18 255);
+  --chart-2: oklch(0.65 0.15 160);
+  --chart-3: oklch(0.75 0.14 55);
+  --chart-4: oklch(0.60 0.16 280);
+  --chart-5: oklch(0.55 0.20 25);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.98 0.005 255);
+  --sidebar-foreground: oklch(0.25 0.03 255);
+  --sidebar-primary: oklch(0.45 0.16 255);
+  --sidebar-primary-foreground: oklch(0.98 0.01 255);
+  --sidebar-accent: oklch(0.94 0.03 255);
+  --sidebar-accent-foreground: oklch(0.25 0.04 255);
+  --sidebar-border: oklch(0.91 0.01 255);
+  --sidebar-ring: oklch(0.45 0.16 255);
+}
+
+.dark {
+  --background: oklch(0.12 0.02 255);
+  --foreground: oklch(0.95 0.01 255);
+  --card: oklch(0.16 0.03 255);
+  --card-foreground: oklch(0.95 0.01 255);
+  --popover: oklch(0.14 0.03 255);
+  --popover-foreground: oklch(0.95 0.01 255);
+  --primary: oklch(0.65 0.18 230);
+  --primary-foreground: oklch(0.10 0.05 230);
+  --secondary: oklch(0.22 0.04 255);
+  --secondary-foreground: oklch(0.95 0.01 255);
+  --muted: oklch(0.20 0.03 255);
+  --muted-foreground: oklch(0.70 0.03 255);
+  --accent: oklch(0.25 0.05 255);
+  --accent-foreground: oklch(0.95 0.01 255);
+  --destructive: oklch(0.50 0.20 25);
+  --destructive-foreground: oklch(0.95 0.02 25);
+  --border: oklch(0.25 0.03 255);
+  --input: oklch(0.25 0.03 255);
+  --ring: oklch(0.65 0.18 230);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.65 0.18 230);
+  --chart-2: oklch(0.70 0.15 160);
+  --chart-3: oklch(0.80 0.14 55);
+  --chart-4: oklch(0.65 0.16 280);
+  --chart-5: oklch(0.60 0.22 25);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.10 0.02 255);
+  --sidebar-foreground: oklch(0.85 0.02 255);
+  --sidebar-primary: oklch(0.65 0.18 230);
+  --sidebar-primary-foreground: oklch(0.10 0.05 230);
+  --sidebar-accent: oklch(0.22 0.04 255);
+  --sidebar-accent-foreground: oklch(0.95 0.01 255);
+  --sidebar-border: oklch(0.18 0.03 255);
+  --sidebar-ring: oklch(0.65 0.18 230);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}
