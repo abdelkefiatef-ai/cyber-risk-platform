@@ -1,10 +1,10 @@
 {
-  "total_assets": 6,
-  "total_vulnerabilities": 5,
-  "average_risk_score": 13.055555555555555,
+  "total_assets": 80,
+  "total_vulnerabilities": 118,
+  "average_risk_score": 9.381666666666666,
   "critical_assets": 0,
-  "high_risk_assets": 1,
-  "medium_risk_assets": 0,
-  "low_risk_assets": 5,
-  "risk_scenarios": 0
+  "high_risk_assets": 6,
+  "medium_risk_assets": 3,
+  "low_risk_assets": 71,
+  "risk_scenarios": 2
 }

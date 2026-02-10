@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "id": "rs_exploit_asset_LNX-APP-02",
+    "title": "Multi-Stage Exploitation of LNX-APP-02",
+    "description": "Multiple critical vulnerabilities on LNX-APP-02 could be chained for privilege escalation and lateral movement",
+    "category": "Multi-Stage Attack",
+    "severity": "Critical",
+    "likelihood": "Likely",
+    "impact": "Catastrophic",
+    "affectedAssetIds": [
+      "asset_LNX-APP-02"
+    ],
+    "correlatedVulnerabilityIds": [
+      "vuln_malware_syslog_1770187826.0_LNX-APP-02",
+      "vuln_malware_syslog_1770436226.0_LNX-APP-02"
+    ],
+    "mitreTactics": [
+      "Initial Access",
+      "Privilege Escalation",
+      "Lateral Movement"
+    ],
+    "mitreTechniques": [
+      "T1190",
+      "T1068",
+      "T1021"
+    ],
+    "businessRiskScore": 89.83999999999999,
+    "detectionCoverage": 60.0,
+    "remediationPlan": "1. Immediately patch vulnerabilities vuln_malware_syslog_1770187826.0_LNX-APP-02, vuln_malware_syslog_1770436226.0_LNX-APP-02. 2. Implement network segmentation. 3. Enable EDR monitoring.",
+    "updatedAt": "2026-02-10T21:50:27.061935",
+    "logEvidence": [],
+    "indicatorsOfCompromise": []
+  },
+  {
+    "id": "rs_lateral_Unknown",
+    "title": "Lateral Movement Risk in Unknown",
+    "description": "Multiple high-risk assets in Unknown create lateral movement opportunities",
+    "category": "Unauthorized Lateral Movement",
+    "severity": "High",
+    "likelihood": "Possible",
+    "impact": "Significant",
+    "affectedAssetIds": [
+      "asset_WIN-DC-07",
+      "asset_WIN-WEB-10",
+      "asset_WIN-FILE-26",
+      "asset_WIN-DC-28",
+      "asset_LNX-APP-02",
+      "asset_LNX-DB-05"
+    ],
+    "correlatedVulnerabilityIds": [],
+    "mitreTactics": [
+      "Lateral Movement",
+      "Discovery"
+    ],
+    "mitreTechniques": [
+      "T1021",
+      "T1018"
+    ],
+    "businessRiskScore": 75.0,
+    "detectionCoverage": 55.0,
+    "remediationPlan": "1. Implement network segmentation. 2. Enable lateral movement detection. 3. Reduce attack surface.",
+    "updatedAt": "2026-02-10T21:50:27.061979",
+    "logEvidence": [],
+    "indicatorsOfCompromise": []
+  }
+]

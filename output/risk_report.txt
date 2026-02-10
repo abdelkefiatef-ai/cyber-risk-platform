@@ -1,0 +1,35 @@
+======================================================================
+CYBER RISK ASSESSMENT REPORT
+======================================================================
+Generated: 2026-02-10 21:50:27
+
+EXECUTIVE SUMMARY
+----------------------------------------------------------------------
+Total Assets: 80
+Total Vulnerabilities: 118
+Average Risk Score: 9.4/100
+
+RISK DISTRIBUTION
+----------------------------------------------------------------------
+Critical Risk Assets (90-100): 0
+High Risk Assets (70-89): 6
+Medium Risk Assets (40-69): 3
+Low Risk Assets (0-39): 71
+
+RISK SCENARIOS
+----------------------------------------------------------------------
+Total Risk Scenarios Identified: 2
+
+Top Risk Scenarios:
+
+1. Multi-Stage Exploitation of LNX-APP-02
+   Severity: Critical
+   Business Risk Score: 89.8
+   Affected Assets: 1
+
+2. Lateral Movement Risk in Unknown
+   Severity: High
+   Business Risk Score: 75.0
+   Affected Assets: 6
+
+======================================================================
