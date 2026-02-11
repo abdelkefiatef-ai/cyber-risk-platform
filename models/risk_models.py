@@ -64,6 +64,7 @@ class Vulnerability:
     affected_assets: List[str] = field(default_factory=list)
     exploit_available: bool = False
     exploit_public: bool = False
+    actively_exploited: bool = False
     patch_available: bool = False
     remediation_status: str = "Pending"
     
